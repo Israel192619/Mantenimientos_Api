@@ -14,23 +14,16 @@ class AuthController extends Controller
         $validator = Validator::make(request()->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
-            'rol' => 'required',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $role = Role::where('nombre_rol', request()->rol)->first();
-
-        if (!$role) {
-            return response()->json(['mensaje' => 'Rol no encontrado'], 404);
-        }
 
         $user = new User;
         $user->email = request()->email;
         $user->password = bcrypt(request()->password);
-        $user->role_id = $role->id;
         $user->save();
 
         return response()->json($user, 201);

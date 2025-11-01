@@ -85,13 +85,13 @@ class UserController extends Controller
         if ($request->has('password')) {
             $dataActualizar['password'] = bcrypt($request->password);
         }
-        if ($request->has('rol')) {
+        /* if ($request->has('rol')) {
             $role = Role::where('nombre_rol', $request->rol)->first();
             if (!$role) {
                 return response()->json(['mensaje' => 'Rol no encontrado'], 404);
             }
             $dataActualizar['role_id'] = $role->id;
-        }
+        } */
 
         $user->update($dataActualizar);
 

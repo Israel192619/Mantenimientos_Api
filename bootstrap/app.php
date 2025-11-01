@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,5 +16,25 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->shouldRenderJsonWhen(function ($request, $e) {
+            return $request->is('api/*') || $request->expectsJson();
+        });
+        $exceptions->respond(function (Response $response) {
+            $status = $response->getStatusCode();
+            if ($status === 404) {
+                return response()->json([
+                    'message' => 'Recurso no encontrado',
+                    'status' => 404
+                ], 404);
+            }
+
+            if ($status === 403) {
+                return response()->json([
+                    'message' => 'No autorizado',
+                    'status' => 403
+                ], 403);
+            }
+
+            return $response;
+        });
     })->create();

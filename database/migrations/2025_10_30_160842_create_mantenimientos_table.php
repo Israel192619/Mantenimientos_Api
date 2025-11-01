@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo', ['preventivo', 'correctivo']);
             $table->date('fecha_programada')->nullable();
             $table->date('fecha_real')->nullable();
             $table->foreignId('equipo_id')->constrained('equipos')->onDelete('cascade');
             $table->foreignId('tecnico_id')->nullable()->constrained('tecnicos')->onDelete('set null');
             $table->text('observaciones')->nullable();
-            $table->enum('estado', ['pendiente', 'en proceso', 'completado', 'cancelado'])->default('pendiente');
+            $table->enum('estado', ['pendiente', 'completado'])->default('pendiente');
             $table->timestamps();
         });
     }

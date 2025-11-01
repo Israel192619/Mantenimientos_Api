@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Tarea extends Model
@@ -14,7 +15,12 @@ class Tarea extends Model
     public function mantenimientos()
     {
         return $this->belongsToMany(Mantenimiento::class, 'mantenimiento_tarea')
-            ->withPivot(['estado', 'observaciones'])
             ->withTimestamps();
+    }
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return Carbon::parse($date)
+            ->timezone(config('app.timezone'))
+            ->format('Y-m-d H:i:s');
     }
 }

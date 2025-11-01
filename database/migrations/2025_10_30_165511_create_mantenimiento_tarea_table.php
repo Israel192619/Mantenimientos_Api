@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('mantenimiento_id')->constrained('mantenimientos')->onDelete('cascade');
             $table->foreignId('tarea_id')->constrained('tareas')->onDelete('cascade');
-            $table->enum('estado', ['pendiente', 'en_progreso', 'completado'])->default('pendiente');
-            $table->text('observaciones')->nullable();
             $table->timestamps();
         });
     }

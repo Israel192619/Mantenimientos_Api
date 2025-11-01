@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Organization\StoreOrganizationRequest;
+use App\Http\Requests\Organization\UpdateOrganizationRequest;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -24,15 +26,8 @@ class OrganizationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOrganizationRequest $request)
     {
-        $validate = Validator::make($request->all(), [
-            'nombre' => 'required|string|unique:organizations,nombre',
-            'description' => 'nullable|string',
-        ]);
-        if ($validate->fails()) {
-            return response()->json(['errors' => $validate->errors()], 400);
-        }
         $organization = Organization::create($request->all());
         $data = [
             'message' => 'Organización creada',
@@ -44,16 +39,8 @@ class OrganizationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Organization $organization)
     {
-        $organization = Organization::find($id);
-        if (!$organization) {
-            $data = [
-                "message" => "Organización no encontrada",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
         $data = [
             'mensaje' => 'Detalles de la organización',
             'organization' => $organization,
@@ -64,23 +51,8 @@ class OrganizationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateOrganizationRequest $request, Organization $organization)
     {
-        $organization = Organization::find($id);
-        if(!$organization){
-            $data = [
-                "message" => "Organización no encontrada",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
-        $validate = Validator::make($request->all(), [
-            'nombre' => 'sometimes|required|string|unique:organizations,nombre,' . $id,
-            'description' => 'sometimes|nullable|string',
-        ]);
-        if($validate->fails()) {
-            return response()->json(['errors' => $validate->errors()], 400);
-        }
         $organization->update($request->all());
         $data = [
             'message' => 'Organización actualizada',
@@ -92,16 +64,8 @@ class OrganizationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Organization $organization)
     {
-        $organization = Organization::find($id);
-        if(!$organization){
-            $data = [
-                "message" => "Organización no encontrada",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
         $organization->delete();
         $data = [
             'message' => 'Organización eliminada',

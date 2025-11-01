@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Tecnico\StoreTecnicoRequest;
+use App\Http\Requests\Tecnico\UpdateTecnicoRequest;
 use App\Models\Tecnico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -24,17 +26,8 @@ class TecnicoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTecnicoRequest $request)
     {
-        $validate = Validator::make($request->all(), [
-            'nombre' => 'required|string',
-            'primer_apellido' => 'required|string',
-            'segundo_apellido' => 'nullable|string',
-            'especialidad' => 'nullable|string',
-        ]);
-        if ($validate->fails()) {
-            return response()->json(['errors' => $validate->errors()], 400);
-        }
         $tecnico = Tecnico::create($request->all());
         $data = [
             'message' => 'Técnico creado',
@@ -46,16 +39,8 @@ class TecnicoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tecnico $tecnico)
     {
-        $tecnico = Tecnico::find($id);
-        if (!$tecnico) {
-            $data = [
-                "message" => "Técnico no encontrado",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
         $data = [
             'mensaje' => 'Detalles del técnico',
             'tecnico' => $tecnico,
@@ -66,25 +51,8 @@ class TecnicoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTecnicoRequest $request, Tecnico $tecnico)
     {
-        $tecnico = Tecnico::find($id);
-        if(!$tecnico){
-            $data = [
-                "message" => "Técnico no encontrado",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
-        $validate = Validator::make($request->all(), [
-            'nombre' => 'sometimes|required|string',
-            'primer_apellido' => 'sometimes|required|string',
-            'segundo_apellido' => 'sometimes|nullable|string',
-            'especialidad' => 'sometimes|nullable|string',
-        ]);
-        if ($validate->fails()) {
-            return response()->json(['errors' => $validate->errors()], 400);
-        }
         $tecnico->update($request->all());
         $data = [
             'message' => 'Técnico actualizado',
@@ -96,16 +64,8 @@ class TecnicoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tecnico $tecnico)
     {
-        $tecnico = Tecnico::find($id);
-        if(!$tecnico){
-            $data = [
-                "message" => "Técnico no encontrado",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
         $tecnico->delete();
         $data = [
             "message" => "Técnico eliminado",

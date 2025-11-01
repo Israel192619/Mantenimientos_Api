@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Tarea\StoreTareaRequest;
+use App\Http\Requests\Tarea\UpdateTareaRequest;
 use App\Models\Tarea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -24,15 +26,8 @@ class TareaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTareaRequest $request)
     {
-        $validate = Validator::make($request->all(), [
-            'nombre' => 'required|string',
-            'descripcion' => 'required|string',
-        ]);
-        if ($validate->fails()) {
-            return response()->json(['errors' => $validate->errors()], 400);
-        }
         $tarea = Tarea::create($request->all());
         $data = [
             'message' => 'Tarea creada',
@@ -44,16 +39,8 @@ class TareaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tarea $tarea)
     {
-        $tarea = Tarea::find($id);
-        if (!$tarea) {
-            $data = [
-                "message" => "Tarea no encontrada",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
         $data = [
             'mensaje' => 'Detalles de la tarea',
             'tarea' => $tarea,
@@ -64,23 +51,8 @@ class TareaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTareaRequest $request, Tarea $tarea)
     {
-        $tarea = Tarea::find($id);
-        if (!$tarea) {
-            $data = [
-                "message" => "Tarea no encontrada",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
-        $validate = Validator::make($request->all(), [
-            'nombre' => 'sometimes|required|string',
-            'descripcion' => 'sometimes|required|string',
-        ]);
-        if ($validate->fails()) {
-            return response()->json(['errors' => $validate->errors()], 400);
-        }
         $tarea->update($request->all());
         $data = [
             'message' => 'Tarea actualizada',
@@ -92,16 +64,8 @@ class TareaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tarea $tarea)
     {
-        $tarea = Tarea::find($id);
-        if (!$tarea) {
-            $data = [
-                "message" => "Tarea no encontrada",
-                "status" => 404
-            ];
-            return response()->json($data,404);
-        }
         $tarea->delete();
         $data = [
             'message' => 'Tarea eliminada',
