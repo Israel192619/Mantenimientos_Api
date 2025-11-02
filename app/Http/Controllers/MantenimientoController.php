@@ -34,6 +34,9 @@ class MantenimientoController extends Controller
         if ($request->filled('tareas')) {
             $mantenimiento->tareas()->attach($request->tareas);
         }
+        $equipo = Equipo::find($mantenimiento->equipo_id);
+        $equipo->proximo_mantenimiento = $mantenimiento->fecha_programada;
+        $equipo->save();
         $data = [
             'message' => 'Mantenimiento creado',
             'mantenimiento' => $mantenimiento->load('tareas'),
@@ -62,12 +65,10 @@ class MantenimientoController extends Controller
         if ($request->filled('tareas')) {
             $mantenimiento->tareas()->sync($request->tareas);
         }
-
+        $equipo = Equipo::find($mantenimiento->equipo_id);
         if ($mantenimiento->estado === 'completado') {
             $mantenimiento->fecha_real = Carbon::now();
             $mantenimiento->save();
-
-            $equipo = Equipo::find($mantenimiento->equipo_id);
             $equipo->ultimo_mantenimiento = $mantenimiento->fecha_real;
             $equipo->proximo_mantenimiento = Carbon::now()->addMonths(6);
             $equipo->save();
@@ -76,8 +77,10 @@ class MantenimientoController extends Controller
                 'equipo_id' => $mantenimiento->equipo_id,
                 'fecha_programada' => Carbon::now()->addMonths(6),
             ]);
+        }else{
+            $equipo->proximo_mantenimiento = $mantenimiento->fecha_programada;
+            $equipo->save();
         }
-
         $data = [
             "message" => "Mantenimiento editado",
             "mantenimiento" => $mantenimiento->load('equipo', 'tecnico', 'tareas'),
