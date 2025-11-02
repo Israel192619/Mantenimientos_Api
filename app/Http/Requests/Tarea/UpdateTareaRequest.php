@@ -25,7 +25,7 @@ class UpdateTareaRequest extends FormRequest
     {
         $tarea = $this->route('tarea');
         return [
-            'nombre' => 'sometimes|required|string' . $tarea->id,
+            'nombre' => 'sometimes|required|string|unique:tareas,nombre,' . $tarea->id,
             'descripcion' => 'sometimes|required|string',
         ];
     }
