@@ -31,6 +31,19 @@ class UpdateTecnicoRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'nombre.required' => 'El nombre del técnico es obligatorio cuando se envía.',
+            'nombre.string' => 'El nombre debe contener solo texto.',
+
+            'primer_apellido.required' => 'Debe ingresar el primer apellido si se envía este campo.',
+            'primer_apellido.string' => 'El primer apellido debe ser un texto válido.',
+
+            'segundo_apellido.string' => 'El segundo apellido debe ser un texto válido.',
+            'especialidad.string' => 'La especialidad debe ser un texto válido.',
+        ];
+    }
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

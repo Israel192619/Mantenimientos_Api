@@ -29,6 +29,15 @@ class UpdateOrganizationRequest extends FormRequest
             'descripcion' => 'sometimes|nullable|string',
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'nombre.required' => 'El nombre de la organización es obligatorio cuando se envía.',
+            'nombre.string' => 'El nombre de la organización debe ser un texto válido.',
+            'nombre.unique' => 'Ya existe una organización con este nombre.',
+            'descripcion.string' => 'La descripción debe ser un texto válido.',
+        ];
+    }
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

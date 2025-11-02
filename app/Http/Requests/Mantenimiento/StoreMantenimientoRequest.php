@@ -35,6 +35,31 @@ class StoreMantenimientoRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'fecha_programada.required' => 'La fecha programada es obligatoria.',
+            'fecha_programada.date' => 'La fecha programada debe tener un formato de fecha válido.',
+
+            'fecha_real.date' => 'La fecha real debe tener un formato de fecha válido.',
+
+            'equipo_id.integer' => 'El identificador del equipo debe ser un número entero.',
+            'equipo_id.exists' => 'El equipo seleccionado no existe en el sistema.',
+
+            'tecnico_id.integer' => 'El identificador del técnico debe ser un número entero.',
+            'tecnico_id.exists' => 'El técnico seleccionado no existe en el sistema.',
+
+            'observaciones.string' => 'Las observaciones deben ser un texto válido.',
+
+            'estado.string' => 'El estado debe ser un texto válido.',
+            'estado.in' => 'El estado debe ser "pendiente" o "completado".',
+
+            'tareas.array' => 'El campo de tareas debe ser un arreglo.',
+            'tareas.*.integer' => 'Cada tarea debe ser un número entero.',
+            'tareas.*.exists' => 'Alguna de las tareas seleccionadas no existe en el sistema.',
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

@@ -36,6 +36,43 @@ class StoreEquipoRequest extends FormRequest
             'estado' => 'required|string',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'codigo.required' => 'El código del equipo es obligatorio.',
+            'codigo.string' => 'El código del equipo debe ser un texto.',
+            'codigo.unique' => 'Ya existe un equipo con este código.',
+
+            'nombre.required' => 'El nombre del equipo es obligatorio.',
+            'nombre.string' => 'El nombre del equipo debe ser un texto válido.',
+
+            'tipo.required' => 'El tipo de equipo es obligatorio.',
+            'tipo.string' => 'El tipo de equipo debe ser un texto válido.',
+
+            'marca.required' => 'La marca del equipo es obligatoria.',
+            'marca.string' => 'La marca del equipo debe ser un texto válido.',
+
+            'organization_id.required' => 'La organización es obligatoria.',
+            'organization_id.integer' => 'El identificador de la organización debe ser un número entero.',
+            'organization_id.exists' => 'La organización seleccionada no existe en el sistema.',
+
+            'sistema_operativo.required' => 'El sistema operativo es obligatorio.',
+            'sistema_operativo.string' => 'El sistema operativo debe ser un texto válido.',
+
+            'procesador.required' => 'El procesador es obligatorio.',
+            'procesador.string' => 'El procesador debe ser un texto válido.',
+
+            'memoria_ram.required' => 'La memoria RAM es obligatoria.',
+            'memoria_ram.string' => 'La memoria RAM debe ser un texto válido.',
+
+            'almacenamiento.required' => 'El almacenamiento es obligatorio.',
+            'almacenamiento.string' => 'El almacenamiento debe ser un texto válido.',
+
+            'estado.required' => 'El estado del equipo es obligatorio.',
+            'estado.string' => 'El estado debe ser un texto válido.',
+        ];
+    }
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

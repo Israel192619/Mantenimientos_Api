@@ -30,6 +30,15 @@ class StoreTecnicoRequest extends FormRequest
             'especialidad' => 'nullable|string',
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'nombre.required' => 'El nombre del técnico es obligatorio.',
+            'nombre.string' => 'El nombre debe contener solo texto.',
+            'primer_apellido.required' => 'Debe ingresar el primer apellido.',
+            'especialidad.string' => 'La especialidad debe ser un texto válido.',
+        ];
+    }
 
     protected function failedValidation(Validator $validator)
     {
@@ -38,4 +47,5 @@ class StoreTecnicoRequest extends FormRequest
             'errors' => $validator->errors()
         ], 422));
     }
+
 }

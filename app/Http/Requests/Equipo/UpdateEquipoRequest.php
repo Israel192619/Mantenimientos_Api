@@ -29,12 +29,34 @@ class UpdateEquipoRequest extends FormRequest
             'nombre' => 'sometimes|required|string',
             'tipo' => 'sometimes|required|string',
             'marca' => 'sometimes|required|string',
-            'organizacion' => 'sometimes|required|string',
+            'organization_id' => 'sometimes|required|string|exists:organizations,id',
             'sistema_operativo' => 'sometimes|required|string',
             'procesador' => 'sometimes|required|string',
             'memoria_ram' => 'sometimes|required|string',
             'almacenamiento' => 'sometimes|required|string',
             'estado' => 'sometimes|required|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'codigo.required' => 'El código del equipo es obligatorio.',
+            'codigo.string' => 'El código del equipo debe ser un texto.',
+            'codigo.unique' => 'Ya existe otro equipo con este código.',
+
+            'organization_id.required' => 'La organización es obligatoria.',
+            'organization_id.integer' => 'El identificador de la organización debe ser un número entero.',
+            'organization_id.exists' => 'La organización seleccionada no existe.',
+
+            'nombre.required' => 'El nombre del equipo es obligatorio.',
+            'tipo.required' => 'El tipo de equipo es obligatorio.',
+            'marca.required' => 'La marca del equipo es obligatoria.',
+            'sistema_operativo.required' => 'El sistema operativo es obligatorio.',
+            'procesador.required' => 'El procesador es obligatorio.',
+            'memoria_ram.required' => 'La memoria RAM es obligatoria.',
+            'almacenamiento.required' => 'El almacenamiento es obligatorio.',
+            'estado.required' => 'El estado del equipo es obligatorio.',
         ];
     }
 

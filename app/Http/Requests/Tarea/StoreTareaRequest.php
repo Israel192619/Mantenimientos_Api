@@ -29,6 +29,17 @@ class StoreTareaRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'nombre.required' => 'El nombre de la tarea es obligatorio.',
+            'nombre.string' => 'El nombre de la tarea debe ser un texto válido.',
+            'nombre.unique' => 'Ya existe una tarea con este nombre, elija otro nombre.',
+
+            'descripcion.required' => 'Debe ingresar una descripción para la tarea.',
+            'descripcion.string' => 'La descripción debe ser un texto válido.',
+        ];
+    }
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
