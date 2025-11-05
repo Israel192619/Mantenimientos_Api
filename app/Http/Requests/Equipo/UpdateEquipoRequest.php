@@ -5,6 +5,7 @@ namespace App\Http\Requests\Equipo;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Carbon;
 
 class UpdateEquipoRequest extends FormRequest
 {
@@ -43,7 +44,7 @@ class UpdateEquipoRequest extends FormRequest
         return [
             'codigo.required' => 'El código del equipo es obligatorio.',
             'codigo.string' => 'El código del equipo debe ser un texto.',
-            'codigo.unique' => 'Ya existe otro equipo con este código.',
+            'codigo.unique' => 'Ya existe un equipo con este código.',
 
             'organization_id.required' => 'La organización es obligatoria.',
             'organization_id.integer' => 'El identificador de la organización debe ser un número entero.',

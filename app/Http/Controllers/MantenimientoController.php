@@ -50,12 +50,13 @@ class MantenimientoController extends Controller
 
     public function update(UpdateMantenimientoRequest $request, Mantenimiento $mantenimiento)
     {
+        $auxMantenimientoEstado = $mantenimiento->estado;
         $mantenimiento->update($request->all());
         if ($request->filled('tareas')) {
             $mantenimiento->tareas()->sync($request->tareas);
         }
         $equipo = Equipo::find($mantenimiento->equipo_id);
-        if ($mantenimiento->estado === 'completado') {
+        if ($mantenimiento->estado === 'completado' && $auxMantenimientoEstado !== 'completado') {
             $mantenimiento->fecha_real = Carbon::now();
             $mantenimiento->save();
             $equipo->ultimo_mantenimiento = $mantenimiento->fecha_real;
