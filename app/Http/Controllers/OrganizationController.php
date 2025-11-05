@@ -30,7 +30,7 @@ class OrganizationController extends Controller
     {
         $organization = Organization::create($request->all());
         $data = [
-            'message' => 'Organización creada',
+            'message' => 'Organización creada exitósamente',
             'organization' => $organization,
         ];
         return response()->json($data, 201);
@@ -55,7 +55,7 @@ class OrganizationController extends Controller
     {
         $organization->update($request->all());
         $data = [
-            'message' => 'Organización actualizada',
+            'message' => 'Organización actualizada exitósamente',
             'organization' => $organization,
         ];
         return response()->json($data, 200);
@@ -75,7 +75,7 @@ class OrganizationController extends Controller
         $organization->delete();
 
         return response()->json([
-            'message' => 'Organización eliminada',
+            'message' => 'Organización eliminada exitósamente',
         ], 200);
     }
 }

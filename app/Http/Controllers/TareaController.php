@@ -30,7 +30,7 @@ class TareaController extends Controller
     {
         $tarea = Tarea::create($request->all());
         $data = [
-            'message' => 'Tarea creada',
+            'message' => 'Tarea creada exitósamente',
             'tarea' => $tarea,
         ];
         return response()->json($data, 201);
@@ -55,7 +55,7 @@ class TareaController extends Controller
     {
         $tarea->update($request->all());
         $data = [
-            'message' => 'Tarea actualizada',
+            'message' => 'Tarea actualizada exitósamente',
             'tarea' => $tarea,
         ];
         return response()->json($data, 200);
@@ -73,7 +73,7 @@ class TareaController extends Controller
         }
         $tarea->delete();
         $data = [
-            'message' => 'Tarea eliminada',
+            'message' => 'Tarea eliminada exitósamente',
         ];
         return response()->json($data, 200);
     }

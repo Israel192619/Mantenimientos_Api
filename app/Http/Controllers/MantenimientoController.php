@@ -33,7 +33,7 @@ class MantenimientoController extends Controller
         $equipo->proximo_mantenimiento = $mantenimiento->fecha_programada;
         $equipo->save();
         $data = [
-            'message' => 'Mantenimiento creado',
+            'message' => 'Mantenimiento creado exitósamente',
             'mantenimiento' => $mantenimiento->load('tareas'),
         ];
         return response()->json($data, 201);
@@ -72,7 +72,7 @@ class MantenimientoController extends Controller
             $equipo->save();
         }
         $data = [
-            "message" => "Mantenimiento editado",
+            "message" => "Mantenimiento editado exitósamente",
             "mantenimiento" => $mantenimiento->load('equipo', 'tecnico', 'tareas'),
         ];
         return response()->json($data, 200);
@@ -82,7 +82,7 @@ class MantenimientoController extends Controller
     {
         $mantenimiento->delete();
         $data = [
-            "message" => "Mantenimiento eliminado"
+            "message" => "Mantenimiento eliminado exitósamente",
         ];
         return response()->json($data, 200);
     }

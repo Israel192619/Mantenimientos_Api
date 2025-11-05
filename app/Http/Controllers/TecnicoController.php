@@ -30,7 +30,7 @@ class TecnicoController extends Controller
     {
         $tecnico = Tecnico::create($request->all());
         $data = [
-            'message' => 'Técnico creado',
+            'message' => 'Técnico creado exitósamente',
             'tecnico' => $tecnico,
         ];
         return response()->json($data, 201);
@@ -55,7 +55,7 @@ class TecnicoController extends Controller
     {
         $tecnico->update($request->all());
         $data = [
-            'message' => 'Técnico actualizado',
+            'message' => 'Técnico actualizado exitósamente',
             'tecnico' => $tecnico,
         ];
         return response()->json($data, 200);
@@ -73,7 +73,7 @@ class TecnicoController extends Controller
         }
         $tecnico->delete();
         $data = [
-            "message" => "Técnico eliminado",
+            "message" => "Técnico eliminado exitósamente",
         ];
         return response()->json($data, 200);
     }

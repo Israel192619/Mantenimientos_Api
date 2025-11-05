@@ -30,7 +30,7 @@ class EquipoController extends Controller
     {
         $equipo = Equipo::create($request->all());
         $data = [
-            'message' => 'Equipo creado',
+            'message' => 'Equipo creado exitósamente',
             'equipo' => $equipo->load('organization'),
         ];
         return response()->json($data, 201);
@@ -55,7 +55,7 @@ class EquipoController extends Controller
     {
         $equipo->update($request->all());
         $data = [
-            "message" => "Equipo actualizado",
+            "message" => "Equipo actualizado exitósamente",
             "equipo" => $equipo->load('organization')
         ];
         return response()->json($data,200);
@@ -73,7 +73,7 @@ class EquipoController extends Controller
         }
         $equipo->delete();
         $data = [
-            "message" => "Equipo eliminado"
+            "message" => "Equipo eliminado exitósamente",
         ];
         return response()->json($data,200);
     }
