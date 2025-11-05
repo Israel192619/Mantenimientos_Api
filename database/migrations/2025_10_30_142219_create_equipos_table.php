@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('almacenamiento');
             $table->date('ultimo_mantenimiento')->nullable();
             $table->date('proximo_mantenimiento')->nullable();
-            $table->enum('estado', ['activo', 'en reparación', 'fuera de servicio'])->default('activo');
+            $table->enum('estado', ['activo', 'en reparación'])->default('activo');
             $table->timestamps();
         });
     }

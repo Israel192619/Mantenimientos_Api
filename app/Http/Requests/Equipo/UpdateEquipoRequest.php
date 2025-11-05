@@ -29,7 +29,7 @@ class UpdateEquipoRequest extends FormRequest
             'nombre' => 'sometimes|required|string',
             'tipo' => 'sometimes|required|string',
             'marca' => 'sometimes|required|string',
-            'organization_id' => 'sometimes|required|string|exists:organizations,id',
+            'organization_id' => 'sometimes|required|integer|exists:organizations,id',
             'sistema_operativo' => 'sometimes|required|string',
             'procesador' => 'sometimes|required|string',
             'memoria_ram' => 'sometimes|required|string',

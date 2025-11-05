@@ -16,8 +16,8 @@ class EquipoTableSeeder extends Seeder
         DB::table('equipos')->insert([
             [
                 'codigo' => 'EQP-001',
-                'nombre' => 'Servidor Principal',
-                'tipo' => 'Servidor',
+                'nombre' => 'laptop de prueba',
+                'tipo' => 'Laptop',
                 'marca' => 'Dell',
                 'organization_id' => 1,
                 'sistema_operativo' => 'Linux',
