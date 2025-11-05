@@ -66,6 +66,11 @@ class TareaController extends Controller
      */
     public function destroy(Tarea $tarea)
     {
+        if ($tarea->mantenimientos()->exists()) {
+            return response()->json([
+                'message' => 'No se puede eliminar la tarea porque tiene mantenimientos asociados.'
+            ], 400);
+        }
         $tarea->delete();
         $data = [
             'message' => 'Tarea eliminada',

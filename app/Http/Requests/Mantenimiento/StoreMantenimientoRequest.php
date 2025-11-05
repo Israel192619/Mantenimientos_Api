@@ -26,7 +26,7 @@ class StoreMantenimientoRequest extends FormRequest
         return [
             'fecha_programada' => 'required|date',
             'fecha_real' => 'nullable|date',
-            'equipo_id' => 'sometimes|integer|exists:equipos,id',
+            'equipo_id' => 'required|integer|exists:equipos,id',
             'tecnico_id' => 'nullable|integer|exists:tecnicos,id',
             'observaciones' => 'nullable|string',
             'estado' => 'nullable|string|in:pendiente,completado',

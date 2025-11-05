@@ -66,6 +66,11 @@ class EquipoController extends Controller
      */
     public function destroy(Equipo $equipo)
     {
+        if ($equipo->mantenimientos()->exists()) {
+            return response()->json([
+                'message' => 'No se puede eliminar el equipo porque tiene mantenimientos asociados.'
+            ], 400);
+        }
         $equipo->delete();
         $data = [
             "message" => "Equipo eliminado"

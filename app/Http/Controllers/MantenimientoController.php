@@ -11,9 +11,7 @@ use Illuminate\Http\Request;
 
 class MantenimientoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $mantenimientos = Mantenimiento::with(['equipo', 'tecnico', 'tareas'])->get();
@@ -24,9 +22,6 @@ class MantenimientoController extends Controller
         return response()->json($data, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreMantenimientoRequest $request)
     {
         $mantenimiento = Mantenimiento::create($request->all());
@@ -44,9 +39,6 @@ class MantenimientoController extends Controller
         return response()->json($data, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Mantenimiento $mantenimiento)
     {
         $data = [
@@ -56,9 +48,6 @@ class MantenimientoController extends Controller
         return response()->json($data, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateMantenimientoRequest $request, Mantenimiento $mantenimiento)
     {
         $mantenimiento->update($request->all());
@@ -88,9 +77,6 @@ class MantenimientoController extends Controller
         return response()->json($data, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Mantenimiento $mantenimiento)
     {
         $mantenimiento->delete();

@@ -66,10 +66,16 @@ class OrganizationController extends Controller
      */
     public function destroy(Organization $organization)
     {
+        if ($organization->equipos()->exists()) {
+            return response()->json([
+                'message' => 'No se puede eliminar la organización porque tiene equipos asociados.'
+            ], 400);
+        }
+
         $organization->delete();
-        $data = [
+
+        return response()->json([
             'message' => 'Organización eliminada',
-        ];
-        return response()->json($data, 200);
+        ], 200);
     }
 }

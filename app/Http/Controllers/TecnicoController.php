@@ -66,6 +66,11 @@ class TecnicoController extends Controller
      */
     public function destroy(Tecnico $tecnico)
     {
+        if ($tecnico->mantenimientos()->exists()) {
+            return response()->json([
+                'message' => 'No se puede eliminar el tecnico porque tiene mantenimientos asociados.'
+            ], 400);
+        }
         $tecnico->delete();
         $data = [
             "message" => "Técnico eliminado",
