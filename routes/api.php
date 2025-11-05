@@ -15,16 +15,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 /* Route::middleware('auth:sanctum')->group(function () { */
-    Route::apiResource('users', UserController::class);
-    Route::post('/users/{user}', [UserController::class, 'update']);
     Route::apiResource('tecnicos', TecnicoController::class);
-    Route::post('/tecnicos/{tecnico}', [TecnicoController::class, 'update']);
     Route::apiResource('tareas', TareaController::class);
-    Route::post('/tareas/{tarea}', [TareaController::class, 'update']);
     Route::apiResource('equipos', EquipoController::class);
-    Route::post('/equipos/{equipo}', [EquipoController::class, 'update']);
     Route::apiResource('mantenimientos', MantenimientoController::class);
-    Route::post('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'update']);
     Route::apiResource('organizations', OrganizationController::class);
-    Route::post('/organizations/{organization}', [OrganizationController::class, 'update']);
 /* }); */
