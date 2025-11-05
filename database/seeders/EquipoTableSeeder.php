@@ -18,7 +18,7 @@ class EquipoTableSeeder extends Seeder
                 'codigo' => 'EQP-001',
                 'nombre' => 'laptop de prueba',
                 'tipo' => 'Laptop',
-                'marca' => 'Dell',
+                'marca' => 'HP',
                 'organization_id' => 1,
                 'sistema_operativo' => 'Linux',
                 'procesador' => 'Intel Xeon',

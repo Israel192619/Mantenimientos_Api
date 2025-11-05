@@ -27,7 +27,7 @@ class UpdateTecnicoRequest extends FormRequest
             'nombre' => 'sometimes|required|string',
             'primer_apellido' => 'sometimes|required|string',
             'segundo_apellido' => 'sometimes|nullable|string',
-            'especialidad' => 'sometimes|nullable|string',
+            'especialidad' => 'sometimes|required|string',
         ];
     }
 

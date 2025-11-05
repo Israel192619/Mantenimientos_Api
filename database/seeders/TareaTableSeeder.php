@@ -15,8 +15,8 @@ class TareaTableSeeder extends Seeder
     {
         DB::table('tareas')->insert([
             [
-                'nombre' => 'Revisión de Servidor',
-                'descripcion' => 'Realizar una revisión completa del servidor principal.',
+                'nombre' => 'Cambio de pasta térmica',
+                'descripcion' => 'Realizar el cambio de pasta térmica en el procesador para mejorar la disipación de calor.',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

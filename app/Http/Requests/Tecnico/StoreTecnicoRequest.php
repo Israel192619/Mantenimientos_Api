@@ -27,7 +27,7 @@ class StoreTecnicoRequest extends FormRequest
             'nombre' => 'required|string',
             'primer_apellido' => 'required|string',
             'segundo_apellido' => 'nullable|string',
-            'especialidad' => 'nullable|string',
+            'especialidad' => 'required|string',
         ];
     }
     public function messages(): array
